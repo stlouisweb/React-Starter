@@ -2,6 +2,7 @@ const path = require('path');
 
 const merge = require('webpack-merge');
 
+//const CSS = require("!style!css!less!./file.less");
 const TARGET = process.env.npm_lifecycle_event;
 
 const PATHS = {
@@ -33,13 +34,11 @@ const common = {
   },
   module: {
     loaders: [
-      {
-        // Test expects a RegExp! Note the slashes!
-        test: /\.css$/,
-        loaders: ['style', 'css'],
-        // Include accepts either a path or an array of paths.
-        include: PATHS.app
-      },
+
+      { test: /\.woff|woff2(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&mimetype=application/font-woff" },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&mimetype=application/octet-stream" },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,    loader: "file" },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&mimetype=image/svg+xml" },
       // Set up jsx. This accepts js too thanks to RegExp
       {
         test: /\.jsx?$/,
@@ -50,7 +49,8 @@ const common = {
         // Parse only app files! Without this it will go through entire project.
         // In addition to being slow, that will most likely result in an error.
         include: PATHS.app
-      }
+      },
+      { test: /\.less$/, loader: "style!css!less" }
     ]
   }
 };

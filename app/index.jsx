@@ -1,5 +1,6 @@
-import './main.css';
 
+import 'bootstrap/less/bootstrap.less';
+import './main.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
